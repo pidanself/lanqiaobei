@@ -1,12 +1,12 @@
 //test
 #include<iostream>
+#include<math.h>
 using namespace std;
 
 int main(){
-	string s="123";
-	cout<<s.size();
-
-
+	int num=98;
+	int cnt=(int)log10(num)+1;
+	cout<<cnt;
 	return 0;
 }
 

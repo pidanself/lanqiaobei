@@ -125,6 +125,7 @@ int main()
 
 */
 #include<iostream>
+#include<malloc.h>
 using namespace std;
 
 //重新决出k号位置，v为已输出值 
@@ -160,7 +161,7 @@ void pk(int* a, int* b, int n, int k, int v)
 		return;
 	}
 	
-	if() //填空
+	if(a[b[k1]]>a[b[k2]]) //填空
 		b[k] = b[k1];
 	else
 		b[k] = b[k2];
@@ -212,6 +213,6 @@ void f(int* a, int len)
 
 int main()
 {
-	int a[] = {54,55,18,16,122,17,30,9,58};
-	f(a,9);	
+	int a[] = {1,8,22,15,3,6,12,13};
+	f(a,8);	
 }

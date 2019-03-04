@@ -21,44 +21,26 @@ answer:23421314
 
 */ 
 #include<iostream>
-#include<sstream>
 #include<algorithm> 
 using namespace std;
-void i2s(int i,string &str){
-	stringstream sstr;
-	sstr<<i;
-	sstr>>str;
+
+bool check(string s){
+	if(s.rfind('A')-s.find('A')==2&&
+	s.rfind('2')-s.find('2')==3&&
+	s.rfind('3')-s.find('3')==4&&
+	s.rfind('4')-s.find('4')==5
+	){
+		return true;
+	}
+	return false;
 }
-bool isman(int i){
-	string str;
-	i2s(i,str);
-	for(int j=0;j<str.length();j++){
-		if(str[j]!='1'&&str[j]!='2'&&str[j]!='3'&&str[j]!='4'){
-			return false;
-		}
-		int q=count(str.begin(),str.end(),str[j]);
-		if(q!=2){
-			return false;
-		}
-	}
-	int pd[1000]={0};
-	for(int j=0;j<str.length();j++){
-		if(pd[str[j]]==0){
-			if(str[j]!=str[j+str[j]-'0'+1]){
-				return false;
-			}
-			pd[str[j]]=1;
-		}		
-	}
-	return true;
-}  
 int main(){
-	
-	for(int i=11223344;i<44332211;i++){
-		if(isman(i)){
-			cout<<i<<endl;
+	string s="223344AA" ;
+	do{
+		if(check(s)){
+			cout<<s<<endl;
 		}
-	} 
+	}while(next_permutation(s.begin(),s.end()));
 
 
 	return 0;
