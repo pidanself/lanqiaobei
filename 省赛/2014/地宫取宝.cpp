@@ -71,70 +71,40 @@ CPUÏûºÄ  < 1000ms
 
 */
 #include<iostream>
+#include<cstring>
 using namespace std;
 int n,m,k=0;
 int o=0;
-int a[1000][1000];
-bool can(int b[],int num,int t){
-	for(int i=0;i<num;i++){
-		if(t<=b[i]){
-			return false;
-		}
+int a[50][50];
+int me[50][50][14][14];
+long long expl(int y,int x,int max,int num){
+	long long ans=0;
+	if(me[y][x][max+1][num]!=-1){
+		return me[y][x][max+1][num];
 	}
-	return true;
-}
-void expl(int y,int x,int b[],int num){
+	if(y==n||x==m||num>k){
+		return 0;
+	}
 	if(y==n-1&&x==m-1){
-		if(can(b,num,a[y][x])){
-			if(num==k){
-				o++;
-			}
-			else if(num+1==k){
-				o++;
-			}
-			
+		//²»ÄÃ 
+		if(num==k){
+			ans++;
 		}
-		else{
-			if(num==k){
-				o++;
-			}
-		}
+		//ÏëÄÃ
+		else if(a[y][x]>max&&(num+1)==k){
+			ans++;
+		} 
 	}
-	else if(y==n-1){
-		if(can(b,num,a[y][x])){
-			expl(y,x+1,b,num);
-			b[num]=a[y][x];
-			expl(y,x+1,b,num+1);
-			
-		}
-		else{
-			expl(y,x+1,b,num);
-		}
+	if(a[y][x]>max){
+		ans+=expl(y,x+1,a[y][x],num+1);
+		ans+=expl(y+1,x,a[y][x],num+1);
 	}
-	else if(x==m-1){
-		if(can(b,num,a[y][x])){
-			expl(y+1,x,b,num);
-			b[num]=a[y][x];
-			expl(y+1,x,b,num+1);
-			
-		}
-		else{
-			expl(y+1,x,b,num);
-		}
-	}
-	else{
-		if(can(b,num,a[y][x])){
-			expl(y+1,x,b,num);
-			expl(y,x+1,b,num);
-			b[num]=a[y][x];
-			expl(y+1,x,b,num+1);
-			expl(y,x+1,b,num+1);
-		}
-		else{
-			expl(y+1,x,b,num);
-			expl(y,x+1,b,num);
-		}
-	}
+	ans+=expl(y,x+1,max,num);
+	ans+=expl(y+1,x,max,num);
+	ans=ans%1000000007;
+	me[y][x][max+1][num]=ans;
+	
+	return ans;
 }
 
 int main(){
@@ -144,10 +114,9 @@ int main(){
 			cin>>a[i][j];
 		}
 	}
-	int b[n*m]={0};
-	expl(0,0,b,0);
-	o=o%1000000007; 
-	cout<<o;
+	memset(me,-1,sizeof(me));
+	
+	cout<<expl(0,0,-1,0);
 	return 0;
 }
 

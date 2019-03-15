@@ -143,7 +143,7 @@ int jin_wei(char* p)
 			strncpy(buf,p,6);
 			r = strcmp(level[i], buf);
 			if(r<0) return i+1;
-			while(r==0) return i;//______________________________;  //МоїХ
+			if(r>0) return i;//______________________________;  //МоїХ
 		}
 	}
 	
