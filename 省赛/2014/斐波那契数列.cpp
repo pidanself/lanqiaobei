@@ -58,9 +58,27 @@ CPUÏûºÄ  < 1000ms
 using namespace std;
 
 int main(){
+	long long n,m,p;
+	cin>>n>>m>>p;
+	long long a=1,b=1;
+	long long fm,fn;
+	for(long long i=3;i<=n+2;i++){
 
-
-
+		long long t;
+		t=a;
+		a=b;
+		b=t+a;
+		if(i==m){
+			fm=b;
+		}
+		if(i>m){
+			a%=fm;
+			b%=fm;
+		}
+	}
+	b%=p;
+	b-=1;
+	cout<<b;
 	return 0;
 }
 

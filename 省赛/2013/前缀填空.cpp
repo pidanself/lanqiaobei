@@ -46,7 +46,7 @@ char* prefix(char* haystack_start, char* needle_start)
 
 int main(){
 	cout<<prefix("abc","abcd");
-
+	cout<<"sasac";
 
 	return 0;
 }

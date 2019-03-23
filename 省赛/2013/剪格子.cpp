@@ -3,11 +3,14 @@
 
     如图p1.jpg所示，3 x 3 的格子中填写了一些整数。
 
-    我们沿着图中的红色线剪开，得到两个部分，每个部分的数字和都是60。
+    我们沿着图中的红色线剪开，得到两个部分，每个部
+	分的数字和都是60。
 
-    本题的要求就是请你编程判定：对给定的m x n 的格子中的整数，是否
+    本题的要求就是请你编程判定：对给定的m x n 的
+	格子中的整数，是否
 	可以分割为两个部分，使得这两个区域的数字和相等。
-    如果存在多种解答，请输出包含左上角格子的那个区域包含的格子的最小数目。   
+    如果存在多种解答，请输出包含左上角格子的那个区
+	域包含的格子的最小数目。   
     如果无法分割，则输出 0
 
 程序输入输出格式要求：
@@ -57,11 +60,59 @@ CPU消耗  < 5000ms
 
 */ 
 #include<iostream>
+#include<cstring>
 using namespace std;
+int mem[10][10],g[10][10],ge;
+int ans=100,mid=0;
+int r,c;
+
+void dfs(int n,int i,int j,int t){
+	if(n>ge) return;
+	t+=g[i][j];
+	if(t>mid) return;
+	if(t==mid){
+		ans=min(ans,n);
+		return;
+	}
+	mem[i][j]=1;
+	if(i+1<r&&mem[i+1][j]==0){
+		dfs(n+1,i+1,j,t);
+	}
+	if(j+1<c&&mem[i][j+1]==0){
+		dfs(n+1,i,j+1,t);
+	}
+	if(j-1>-1&&mem[i][j-1]==0){
+		dfs(n+1,i,j-1,t);
+	}
+	if(i-1>-1&&mem[i-1][j]==0){
+		dfs(n+1,i-1,j,t);
+	}
+	mem[i][j]=0;
+} 
 
 int main(){
-
-
+	cin>>c>>r;
+	ge=r*c;
+	memset(mem,0,sizeof(mem));
+	int total=0;
+	for(int i=0;i<r;i++){
+		for(int j=0;j<c;j++){
+			cin>>g[i][j];
+			total+=g[i][j];
+		}
+	}
+	if(total%2!=0){
+		cout<<0;
+		return 0;
+	}
+	mid=total/2;
+	
+	dfs(1,0,0,0);
+	if(ans==100){
+		cout<<0	;
+		return 0;
+	}
+	cout<<ans;
 
 	return 0;
 }

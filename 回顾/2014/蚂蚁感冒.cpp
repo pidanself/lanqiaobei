@@ -1,5 +1,4 @@
 /*
-
 标题：蚂蚁感冒
 
     长100厘米的细长直杆子上有n只蚂蚁。
@@ -11,7 +10,8 @@
 	相反的方向爬行。
 
     这些蚂蚁中，有1只蚂蚁感冒了。并且
-	在和其它蚂蚁碰面时，会把感冒传染给碰到的蚂蚁。
+	在和其它蚂蚁碰面时，会把感冒传染给碰到
+	的蚂蚁。
 
     请你计算，当所有蚂蚁都爬离杆子时，
 	有多少只蚂蚁患上了感冒。
@@ -59,59 +59,53 @@ CPU消耗  < 1000ms
 注意: 只使用ANSI C/ANSI C++ 标准，不要调
 用依赖于编译环境或操作系统的特殊函数。
 注意: 所有依赖的函数必须明确地在源文件中 
-#include <xxx>， 不能通过工程设置而省略常用头文件。
+#include <xxx>， 不能通过工程设置而省略常
+用头文件。
 
 提交时，注意选择所期望的编译器类型。
 被感染蚂蚁 
-
 */
 #include<iostream>
-#include<math.h>
+#include<cmath>
 using namespace std;
-int n,o=1,p=0;
- 
-int main(){
-	string s;
-	cin>>n;
-	int a[n];
-	for(int i=0;i<n;i++){
-		cin>>a[i];
-	}
-	int t=abs(a[0]);
-	if(a[0]>0){
-		for(int i=1;i<n;i++){
-			if(a[i]<0&&abs(a[i])>t){
-				o++;
-				p=1;
-			}
-		}
-		if(p==1){
-			for(int i=1;i<n;i++){
-				if(a[i]>0&&a[i]<t){
-					o++;
-				}
-				
-			}
-		}
-	}
-	else{
-		for(int i=1;i<n;i++){
-			if(a[i]>0&&abs(a[i])<t){
-				o++;
-				p=1;
-			}
-		}
-		if(p==1){
-			for(int i=1;i<n;i++){
-				if(a[i]<0&&abs(a[i])>t){
-					o++;
-				}
-				
-			}
-		}
-	}
-	cout<<o;
 
+int main(){
+	int n,x[100],ans=1;
+	cin>>n;
+	for(int i=0;i<n;i++){
+		cin>>x[i];
+	}
+	int p=0;
+	for(int i=1;i<n;i++){
+	
+		if(x[0]*x[i]<0){
+			
+			if(x[0]>0&&abs(x[0])<abs(x[i])){
+				p=1;
+				ans++;
+			}
+			if(x[0]<0&&abs(x[0])>abs(x[i])){
+				p=1;
+				ans++;
+			}
+		}
+	}
+	
+	if(p==1){
+		for(int i=1;i<n;i++){
+			if(x[0]*x[i]>0){
+				if(x[0]>0&&abs(x[0])>abs(x[i])){
+					ans++;
+				}
+				if(x[0]<0&&abs(x[0])<abs(x[i])){
+					ans++;
+				}
+			}
+		}
+		
+		
+	}
+	cout<<ans;
 	return 0;
 }
 
