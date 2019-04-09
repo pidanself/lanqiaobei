@@ -3,13 +3,13 @@
 #include<iostream>
 #include<cstring>
 using namespace std;
-int qi[9][9];
+int qi[13][13];
 int ans=0;
 
 bool check(int row,int col){
 	//左上
 	int i=row-1,j=col-1;
-	while(i<=8&&i>0&&j<=8&&j>0){
+	while(i<=12&&i>0&&j<=12&&j>0){
 		if(qi[i][j]==1){
 			return false;
 		}
@@ -19,7 +19,7 @@ bool check(int row,int col){
 	
 	//右下
 	i=row+1,j=col+1;
-	while(i<=8&&i>0&&j<=8&&j>0){
+	while(i<=12&&i>0&&j<=12&&j>0){
 		if(qi[i][j]==1){
 			return false;
 		}
@@ -29,7 +29,7 @@ bool check(int row,int col){
 	
 	//左下
 	i=row+1,j=col-1;
-	while(i<=8&&i>0&&j<=8&&j>0){
+	while(i<=12&&i>0&&j<=12&&j>0){
 		if(qi[i][j]==1){
 			return false;
 		}
@@ -39,7 +39,7 @@ bool check(int row,int col){
 	
 	//左上
 	i=row-1,j=col+1;
-	while(i<=8&&i>0&&j<=8&&j>0){
+	while(i<=12&&i>0&&j<=12&&j>0){
 		if(qi[i][j]==1){
 			return false;
 		}
@@ -49,7 +49,7 @@ bool check(int row,int col){
 	
 	//上 
 	i=row-1,j=col;
-	while(i<=8&&i>0&&j<=8&&j>0){
+	while(i<=12&&i>0&&j<=12&&j>0){
 		if(qi[i][j]==1){
 			return false;
 		}
@@ -58,7 +58,7 @@ bool check(int row,int col){
 	
 	//有 
 	i=row+1,j=col;
-	while(i<=8&&i>0&&j<=8&&j>0){
+	while(i<=12&&i>0&&j<=12&&j>0){
 		if(qi[i][j]==1){
 			return false;
 		}
@@ -69,12 +69,12 @@ bool check(int row,int col){
 }
 
 void find(int row){
-	if(row>8){
+	if(row>12){
 		ans++;
 		return;
 	}
 	else{
-		for(int col=1;col<9;col++){
+		for(int col=1;col<13;col++){
 			if(check(row,col)){
 				qi[row][col]=1;
 				find(row+1);
